@@ -11,7 +11,7 @@ namespace NetCrawler
     public class Crawler:WebClient
     {
         public TaskQueue Tasks;
-
+        private List<string> _urlStringList = new List<string>(); 
         public Crawler()
         {
             this.Encoding = Encoding.UTF8;
@@ -38,14 +38,19 @@ namespace NetCrawler
                         case WebExceptionStatus.ConnectFailure:
                         case WebExceptionStatus.Timeout:
                         case WebExceptionStatus.ConnectionClosed:
-                            task.Retryed += 1;
-                            Tasks.Enqueue(task);
+                            _doRetry(task);
                             break;
                     }
 
                 }
             }
 
+        }
+
+        private void _doRetry(CrawlTask task)
+        {
+            task.Retryed += 1;
+            Tasks.Enqueue(task);
         }
     }
 

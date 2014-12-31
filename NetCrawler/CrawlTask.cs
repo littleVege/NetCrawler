@@ -11,10 +11,10 @@ namespace NetCrawler
     {
         public Dictionary<string, string> Header;
         public Uri Url;
-        public OnResponse Callback;
+        public DateTime CreateAt = DateTime.Now;
         public int Retryed = 0;
         public string Method = "get";
-
+        
         public CrawlTask(string url):this(url,"get",null)
         {
             
@@ -28,7 +28,7 @@ namespace NetCrawler
         public CrawlTask(string url, string method, Dictionary<string, string> header)
         {
             method = method.ToLower();
-            var methodReg = new Regex(@"^((post)|(get)|(delete)|(put))$", options: RegexOptions.ECMAScript);
+            var methodReg = new Regex(@"^((post)|(get)|(delete)|(put))$", RegexOptions.ECMAScript);
             Url = new Uri(url);
             Header = new Dictionary<string, string>
             {

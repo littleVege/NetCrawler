@@ -8,6 +8,5 @@ namespace NetCrawler
 {
     public class TaskQueue : Queue<CrawlTask>
     {
-
     }
 }
